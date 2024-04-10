@@ -31,7 +31,7 @@ function draw() {
   for (let i = 0; i < eggs.length; i++) {
     eggs[i].show();
     eggs[i].move();
-    eggs[i].overlap(mouseX, mouseY);
+    eggs[i].overlap(mouseX, 350);
 
     //if the egg is off screen, delete egg and add missed egg
     if (eggs[i].offScreen()) {
