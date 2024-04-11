@@ -1,5 +1,5 @@
 let img1;
-let img2; 
+let img2;
 let eggs = [];
 
 let timer = 50;
@@ -12,26 +12,27 @@ let missedEgg = 0;
 
 function preload() {
   eggimg = loadImage("easteregg3.png");
-  img1 = loadImage('basket.jpg');
-  img2 = loadImage('background.png');
+  img1 = loadImage("basket.jpg");
+  img2 = loadImage("background.png");
 }
 
 function setup() {
- var canvas = createCanvas(600, 400);
- canvas.parent("project");
+  var canvas = createCanvas(600, 400);
+  canvas.parent("project");
+  noCursor(); //this will hide the cursor
 }
 
 function draw() {
   background(220);
-  imageMode (CORNER);
+  imageMode(CORNER);
   image(img2, 0, 0, width, height);
-    
-    imageMode(CENTER);
-    image(img1, mouseX, 350, 110, 100);
+
+  imageMode(CENTER);
+  image(img1, mouseX, 350, 110, 100);
   for (let i = 0; i < eggs.length; i++) {
     eggs[i].show();
     eggs[i].move();
-    eggs[i].overlap(mouseX, 350);
+    eggs[i].overlap(mouseX, 350); //350 for the y axis
 
     //if the egg is off screen, delete egg and add missed egg
     if (eggs[i].offScreen()) {
@@ -93,7 +94,8 @@ class Egg {
 
 function collectegg() {
   for (let i = 0; i < eggs.length; i++) {
-    if (eggs[i].overlap(mouseX, mouseY)) {
+    //350 for the y axis
+    if (eggs[i].overlap(mouseX, 350)) {
       eggs.splice(i, 1);
       eggCount++;
     }
@@ -105,7 +107,7 @@ function eggspawner() {
     let e = new Egg(random(width), 0, 50, 3);
     eggs.push(e);
 
-    timer = 50;
+    timer = random(30, 80); // added some varience with the timer!
   }
 }
 
@@ -120,4 +122,5 @@ function eggOver() {
   background(0, 0, 0);
   textAlign(CENTER);
   text("It's Egg-over for You!", width / 2, height / 2);
+  text("Total Eggs Collected:" + " " + eggCount, width / 2, height / 2 + 40);
 }
